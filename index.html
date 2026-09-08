@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Risol Mayo • Lezat & Renyah</title>
+  <!-- Font & styling dasar -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #fcf8f0;
+      color: #2d2a24;
+      line-height: 1.5;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card {
+      max-width: 1000px;
+      width: 100%;
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
+      overflow: hidden;
+      transition: all 0.2s ease;
+      padding: 1.8rem 2rem 2.5rem;
+    }
+    /* gambar utama */
+    .gallery {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .gallery img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 28px;
+      box-shadow: 0 12px 28px -8px rgba(0,0,0,0.15);
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      background: #f3ede4;
+      transition: transform 0.2s;
+      border: 2px solid #fff3e0;
+    }
+    .gallery img:hover {
+      transform: scale(1.01);
+    }
+    /* judul & tagline */
+    .header-produk {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+    .header-produk h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #b45f2b;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.4rem;
+    }
+    .header-produk .tagline {
+      font-size: 1.1rem;
+      background: #f7efe4;
+      display: inline-block;
+      padding: 0.3rem 1.4rem;
+      border-radius: 40px;
+      color: #6b4a2c;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    /* grid deskripsi + kontak */
+    .grid-dua {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 0.8rem;
+    }
+    /* deskripsi */
+    .deskripsi-box {
+      background: #fdfaf5;
+      padding: 1.6rem 1.8rem;
+      border-radius: 28px;
+      border: 1px solid #f1e5d6;
+    }
+    .deskripsi-box h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #4e3a28;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .deskripsi-box h2 span {
+      background: #d9b382;
+      color: white;
+      font-size: 1rem;
+      padding: 0.1rem 0.7rem;
+      border-radius: 30px;
+      margin-left: 6px;
+    }
+    .deskripsi-box p {
+      margin-bottom: 0.8rem;
+      color: #3d352a;
+      font-weight: 400;
+      font-size: 1.05rem;
+    }
+    .deskripsi-box .highlight {
+      background: #fff1e0;
+      padding: 0.3rem 0.8rem;
+      border-radius: 30px;
+      display: inline-block;
+      font-weight: 600;
+      color: #9f6a38;
+      margin-top: 0.2rem;
+    }
+    .deskripsi-box ul {
+      list-style: none;
+      margin: 0.8rem 0 0.2rem;
+    }
+    .deskripsi-box ul li {
+      padding: 0.3rem 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .deskripsi-box ul li::before {
+      content: "▹";
+      color: #c4874a;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    /* kontak person */
+    .kontak-box {
+      background: #fdfaf5;
+      padding: 1.6rem 1.8rem;
+      border-radius: 28px;
+      border: 1px solid #f1e5d6;
+      display: flex;
+      flex-direction: column;
+    }
+    .kontak-box h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #4e3a28;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .kontak-box h2 span {
+      background: #b45f2b;
+      color: white;
+      font-size: 0.9rem;
+      padding: 0.1rem 0.9rem;
+      border-radius: 30px;
+    }
+    .person {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .person-item {
+      background: white;
+      border-radius: 20px;
+      padding: 0.9rem 1.2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+      border: 1px solid #f0e4d4;
+      transition: 0.1s ease;
+    }
+    .person-item:hover {
+      border-color: #dbb48b;
+      background: #fffcf7;
+    }
+    .person-item .nama {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #3f2f1e;
+    }
+    .person-item .jabatan {
+      font-size: 0.9rem;
+      color: #826a51;
+      background: #f3ece2;
+      display: inline-block;
+      padding: 0.1rem 0.8rem;
+      border-radius: 30px;
+      margin-top: 2px;
+    }
+    .person-item .detail {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.2rem;
+    }
+    .person-item .detail a {
+      color: #7f5d3b;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px dotted transparent;
+      transition: 0.15s;
+    }
+    .person-item .detail a:hover {
+      color: #b45f2b;
+      border-bottom-color: #b45f2b;
+    }
+    .person-item .detail .label {
+      color: #907a65;
+      font-weight: 400;
+    }
+    .badge-wa {
+      background: #25d36610;
+      border-radius: 30px;
+      padding: 0.1rem 0.8rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0e7a3b;
+    }
+    .footer-note {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ae9a86;
+      border-top: 1px solid #efe5d9;
+      padding-top: 1.5rem;
+      letter-spacing: 0.3px;
+    }
+    /* responsive */
+    @media (max-width: 720px) {
+      .card {
+        padding: 1.2rem 1.2rem 1.8rem;
+      }
+      .grid-dua {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .header-produk h1 {
+        font-size: 2.2rem;
+      }
+      .gallery img {
+        max-width: 100%;
+      }
+    }
+    @media (max-width: 480px) {
+      .header-produk h1 {
+        font-size: 1.8rem;
+      }
+      .deskripsi-box, .kontak-box {
+        padding: 1rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- GAMBAR PRODUK -->
+    <div class="gallery">
+      <img 
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Crect width='500' height='500' fill='%23f3ede4'/%3E%3Ccircle cx='250' cy='230' r='120' fill='%23e6d5b8'/%3E%3Ccircle cx='250' cy='230' r='100' fill='%23f5e4c9'/%3E%3Cpath d='M160 220 Q200 180 250 190 Q300 200 340 220 Q320 280 250 290 Q180 280 160 220' fill='%23dbb48b'/%3E%3Crect x='190' y='280' width='120' height='30' rx='12' fill='%23b48b5a'/%3E%3Crect x='210' y='310' width='80' height='12' rx='6' fill='%239f7a4b'/%3E%3Ccircle cx='200' cy='190' r='16' fill='%23cf9f6e'/%3E%3Ccircle cx='300' cy='190' r='16' fill='%23cf9f6e'/%3E%3Ccircle cx='220' cy='205' r='8' fill='%237a5a38'/%3E%3Ccircle cx='280' cy='205' r='8' fill='%237a5a38'/%3E%3Cpath d='M235 220 Q250 235 265 220' stroke='%2385633f' stroke-width='4' stroke-linecap='round' fill='none' /%3E%3Ctext x='80' y='420' font-family='Quicksand, sans-serif' font-size='28' font-weight='700' fill='%239f7a4b'%3ERisol Mayo%3C/text%3E%3Ctext x='120' y='460' font-family='Quicksand, sans-serif' font-size='18' fill='%23b48b5a'%3E✨ gurih &amp; renyah ✨%3C/text%3E%3C/svg%3E"
+        alt="Risol Mayo - gurih dan renyah"
+        title="Risol Mayo special"
+      />
+    </div>
+
+    <!-- JUDUL PRODUK -->
+    <div class="header-produk">
+      <h1>🌯 Risol Mayo</h1>
+      <div class="tagline">✨ renyah di luar, lembut di dalam ✨</div>
+    </div>
+
+    <!-- DESKRIPSI + KONTAK (grid) -->
+    <div class="grid-dua">
+      <!-- DESKRIPSI PRODUK -->
+      <div class="deskripsi-box">
+        <h2>📋 Deskripsi <span>best</span></h2>
+        <p>
+          <strong>Risol Mayo</strong> adalah camilan favorit dengan isian 
+          <strong>mayones premium</strong> yang creamy, dipadukan dengan 
+          <strong>ayam suwir</strong> dan <strong>wortel</strong> segar. 
+          Dibungkus kulit risol tipis dan digoreng hingga <span class="highlight">kecokelatan & renyah</span>.
+        </p>
+        <ul>
+          <li>Kulit super renyah & tidak berminyak</li>
+          <li>Isian mayones + ayam + wortel + keju</li>
+          <li>Rasa gurih, sedikit manis, dan creamy</li>
+          <li>Ukuran jumbo, cocok untuk camilan atau lauk</li>
+        </ul>
+        <p style="margin-top: 0.6rem; background: #efe5d8; padding: 0.3rem 1rem; border-radius: 30px; display: inline-block;">
+          ⭐ tersedia varian pedas & original
+        </p>
+      </div>
+
+      <!-- KONTAK PERSON -->
+      <div class="kontak-box">
+        <h2>📞 Kontak <span>person</span></h2>
+        <div class="person">
+          <!-- Kontak 1 -->
+          <div class="person-item">
+            <div class="nama">Ibu Siti Rahayu</div>
+            <div class="jabatan">Owner • Risol Mayo Khas</div>
+            <div class="detail">
+              <a href="tel:+6281234567890">📱 +62 812-3456-7890</a>
+              <span class="badge-wa">💬 WA</span>
+            </div>
+            <div class="detail" style="margin-top: 0.2rem;">
+              <span class="label">📧</span> 
+              <a href="mailto:risolmayo@example.com">risolmayo@example.com</a>
+            </div>
+          </div>
+          <!-- Kontak 2 -->
+          <div class="person-item">
+            <div class="nama">Bapak Andi Pratama</div>
+            <div class="jabatan">Mitra & Pemesanan</div>
+            <div class="detail">
+              <a href="tel:+6282198765432">📱 +62 821-9876-5432</a>
+              <span class="badge-wa">💬 WA</span>
+            </div>
+            <div class="detail" style="margin-top: 0.2rem;">
+              <span class="label">📷 IG</span> 
+              <a href="#">@risolmayo_enak</a>
+            </div>
+          </div>
+          <!-- alamat / info tambahan -->
+          <div style="margin-top: 0.2rem; font-size: 0.95rem; background: #f7efe6; padding: 0.5rem 1rem; border-radius: 60px; text-align: center; color: #5e4a35;">
+            🏠 Jl. Kuliner No. 45, Yogyakarta
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- footer -->
+    <div class="footer-note">
+      🧡 Pesan sekarang • Tersedia untuk acara & oleh-oleh • Fresh setiap hari
+    </div>
+  </div>
+</body>
+</html>

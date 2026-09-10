@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuliner Nusantara • Risol Mayo, Mie Ayam & Es Kuwut</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(145deg, #fcf8f0 0%, #f7ede0 100%);
+      color: #2d2a24;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    /* ===== HEADER ===== */
+    .main-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .main-header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #b45f2b;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+    .main-header p {
+      font-size: 1.15rem;
+      color: #7a654f;
+      font-weight: 500;
+    }
+    .main-header .divider {
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, #d9b382, #b45f2b);
+      margin: 1rem auto 0;
+      border-radius: 10px;
+    }
+
+    /* ===== GRID PRODUK ===== */
+    .produk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .produk-card {
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 18px 35px -15px rgba(0,0,0,0.18);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: 1px solid #f3e9dc;
+    }
+    .produk-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 26px 45px -18px rgba(0,0,0,0.25);
+    }
+    /* gambar */
+    .produk-gambar {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #f9f3ea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 1.2rem;
+      border-bottom: 2px dashed #f0e2d0;
+    }
+    .produk-gambar svg {
+      width: 100%;
+      height: 100%;
+      max-width: 260px;
+      max-height: 260px;
+      transition: transform 0.3s;
+    }
+    .produk-card:hover .produk-gambar svg {
+      transform: scale(1.04);
+    }
+    /* konten */
+    .produk-konten {
+      padding: 1.4rem 1.6rem 1.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .produk-konten h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #4e3a28;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .produk-konten h2 .emoji-badge {
+      font-size: 1.4rem;
+    }
+    .produk-konten .harga {
+      display: inline-block;
+      background: #fff1e0;
+      color: #b45f2b;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      margin-bottom: 0.9rem;
+      border: 1px solid #f0dcc6;
+      align-self: flex-start;
+    }
+    .produk-konten p {
+      font-size: 1rem;
+      color: #3d352a;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+    .produk-konten .fitur {
+      list-style: none;
+      margin-bottom: 1.2rem;
+    }
+    .produk-konten .fitur li {
+      padding: 0.25rem 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      color: #5c4b3a;
+    }
+    .produk-konten .fitur li::before {
+      content: "✓";
+      color: #b48b5a;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    /* ===== KONTAK PERSON SECTION ===== */
+    .kontak-section {
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 18px 35px -15px rgba(0,0,0,0.18);
+      padding: 2rem 2rem 2.2rem;
+      border: 1px solid #f3e9dc;
+    }
+    .kontak-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #b45f2b;
+      text-align: center;
+      margin-bottom: 0.4rem;
+    }
+    .kontak-section .subhead {
+      text-align: center;
+      color: #7a654f;
+      margin-bottom: 1.8rem;
+      font-size: 1rem;
+    }
+    .kontak-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .kontak-card {
+      background: #fdfaf5;
+      border-radius: 1.5rem;
+      padding: 1.4rem 1.5rem;
+      border: 1px solid #f0e2d0;
+      transition: 0.2s;
+    }
+    .kontak-card:hover {
+      border-color: #dbb48b;
+      background: #fffcf7;
+    }
+    .kontak-card .nama {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #3f2f1e;
+    }
+    .kontak-card .jabatan {
+      font-size: 0.85rem;
+      color: #826a51;
+      background: #f3ece2;
+      display: inline-block;
+      padding: 0.1rem 0.8rem;
+      border-radius: 30px;
+      margin-top: 3px;
+      margin-bottom: 0.7rem;
+    }
+    .kontak-card .detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.95rem;
+    }
+    .kontak-card .detail a {
+      color: #7f5d3b;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.15s;
+    }
+    .kontak-card .detail a:hover {
+      color: #b45f2b;
+    }
+    .badge-wa {
+      background: #25d36615;
+      border-radius: 30px;
+      padding: 0.05rem 0.7rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #0e7a3b;
+      margin-left: 4px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid #efe5d9;
+      color: #ae9a86;
+      font-size: 0.95rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .main-header h1 {
+        font-size: 2rem;
+      }
+      .produk-konten h2 {
+        font-size: 1.4rem;
+      }
+      .kontak-section {
+        padding: 1.5rem 1.2rem;
+      }
+      .produk-gambar svg {
+        max-width: 200px;
+        max-height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER -->
+    <header class="main-header">
+      <h1>🍽️ Kuliner Nusantara</h1>
+      <p>Risol Mayo • Mie Ayam • Es Kuwut — Sajian lezat setiap hari</p>
+      <div class="divider"></div>
+    </header>
+
+    <!-- PRODUK GRID -->
+    <section class="produk-grid">
+
+      <!-- ===== PRODUK 1: RISOL MAYO ===== -->
+      <article class="produk-card">
+        <div class="produk-gambar">
+          <!-- SVG Risol Mayo -->
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Risol Mayo">
+            <defs>
+              <linearGradient id="risolGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f5e4c9"/>
+                <stop offset="100%" stop-color="#e6cba3"/>
+              </linearGradient>
+              <linearGradient id="kulitGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#e8b87a"/>
+                <stop offset="100%" stop-color="#c28a4a"/>
+              </linearGradient>
+            </defs>
+            <!-- background lingkaran -->
+            <circle cx="150" cy="150" r="140" fill="#fdf6ec"/>
+            <circle cx="150" cy="150" r="120" fill="#f9eddc"/>
+            <!-- piring -->
+            <ellipse cx="150" cy="220" rx="110" ry="28" fill="#e8d5bb" opacity="0.6"/>
+            <!-- risol 1 -->
+            <g transform="rotate(-12 130 160)">
+              <rect x="70" y="120" width="120" height="70" rx="20" fill="url(#kulitGrad)" stroke="#a86f34" stroke-width="2"/>
+              <rect x="80" y="130" width="100" height="50" rx="14" fill="url(#risolGrad)"/>
+              <!-- isian mayo -->
+              <circle cx="110" cy="150" r="12" fill="#fff8e7" stroke="#e0c9a6" stroke-width="1.5"/>
+              <circle cx="140" cy="150" r="12" fill="#fff8e7" stroke="#e0c9a6" stroke-width="1.5"/>
+              <circle cx="170" cy="155" r="10" fill="#fff8e7" stroke="#e0c9a6" stroke-width="1.5"/>
+              <!-- ayam & wortel -->
+              <rect x="95" y="165" width="18" height="8" rx="4" fill="#d68f5c"/>
+              <rect x="125" y="168" width="20" height="7" rx="3" fill="#e8a86b"/>
+              <rect x="155" y="165" width="16" height="8" rx="4" fill="#d68f5c"/>
+              <!-- keriting renyah -->
+              <path d="M85 135 Q95 128 105 135" stroke="#a86f34" stroke-width="2" fill="none"/>
+              <path d="M120 132 Q130 125 140 132" stroke="#a86f34" stroke-width="2" fill="none"/>
+            </g>
+            <!-- risol 2 (belakang) -->
+            <g transform="rotate(15 180 140) translate(10, -10)">
+              <rect x="120" y="100" width="110" height="65" rx="18" fill="#d9a86e" stroke="#9f6a34" stroke-width="2"/>
+              <rect x="130" y="110" width="90" height="45" rx="12" fill="#f0dcc0"/>
+              <circle cx="155" cy="130" r="10" fill="#fff8e7"/>
+              <circle cx="185" cy="130" r="10" fill="#fff8e7"/>
+              <rect x="145" y="142" width="16" height="7" rx="3" fill="#d68f5c"/>
+              <rect x="175" y="142" width="14" height="7" rx="3" fill="#e8a86b"/>
+            </g>
+            <!-- taburan / hiasan -->
+            <circle cx="100" cy="100" r="4" fill="#e8cba3"/>
+            <circle cx="210" cy="95" r="5" fill="#e8cba3"/>
+            <circle cx="190" cy="200" r="4" fill="#e8cba3"/>
+            <text x="150" y="275" text-anchor="middle" font-family="Quicksand, sans-serif" font-size="18" font-weight="700" fill="#b45f2b">Risol Mayo</text>
+          </svg>
+        </div>
+        <div class="produk-konten">
+          <h2><span class="emoji-badge">🌯</span> Risol Mayo</h2>
+          <div class="harga">Rp 8.000 / pcs</div>
+          <p>
+            Risol dengan isian mayones premium yang creamy, dipadukan dengan ayam suwir berbumbu, 
+            wortel segar, dan telur. Kulit tipis dan digoreng hingga keemasan — renyah di luar, lumer di dalam.
+          </p>
+          <ul class="fitur">
+            <li>Isian mayo + ayam + wortel + telur</li>
+            <li>Kulit renyah & tidak berminyak</li>
+            <li>Tersedia varian original & pedas</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ===== PRODUK 2: MIE AYAM ===== -->
+      <article class="produk-card">
+        <div class="produk-gambar">
+          <!-- SVG Mie Ayam -->
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mie Ayam">
+            <defs>
+              <linearGradient id="kuahGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#e8c99a"/>
+                <stop offset="100%" stop-color="#c99e63"/>
+              </linearGradient>
+            </defs>
+            <!-- background -->
+            <circle cx="150" cy="150" r="140" fill="#fdf6ec"/>
+            <circle cx="150" cy="150" r="120" fill="#f9eddc"/>
+            <!-- mangkuk -->
+            <ellipse cx="150" cy="230" rx="110" ry="25" fill="#c99e63" opacity="0.4"/>
+            <path d="M60 150 Q60 240 150 240 Q240 240 240 150 Z" fill="#f5e4c9" stroke="#c28a4a" stroke-width="3"/>
+            <ellipse cx="150" cy="150" rx="90" ry="22" fill="#e8d5bb"/>
+            <!-- kuah -->
+            <ellipse cx="150" cy="152" rx="82" ry="18" fill="url(#kuahGrad)"/>
+            <!-- mie (gulungan) -->
+            <path d="M95 150 Q110 130 150 128 Q190 126 205 148" stroke="#f0dcaa" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <path d="M90 155 Q110 140 150 138 Q190 136 210 153" stroke="#f5e4b8" stroke-width="7" fill="none" stroke-linecap="round"/>
+            <path d="M100 162 Q120 150 150 148 Q180 146 200 160" stroke="#f0dcaa" stroke-width="7" fill="none" stroke-linecap="round"/>
+            <path d="M105 168 Q125 158 150 156 Q175 154 195 166" stroke="#f5e4b8" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <!-- ayam kecap -->
+            <rect x="110" y="135" width="22" height="14" rx="5" fill="#a86f34"/>
+            <rect x="140" y="132" width="20" height="13" rx="5" fill="#8a5628"/>
+            <rect x="165" y="136" width="18" height="12" rx="5" fill="#a86f34"/>
+            <!-- sawi hijau -->
+            <path d="M95 145 Q85 130 95 118 Q105 130 100 145" fill="#7a9e4a"/>
+            <path d="M195 143 Q205 128 198 116 Q188 128 192 143" fill="#7a9e4a"/>
+            <!-- telur -->
+            <ellipse cx="130" cy="148" rx="14" ry="10" fill="#fff8e7" stroke="#e0c9a6" stroke-width="1.5"/>
+            <circle cx="130" cy="146" r="6" fill="#f0c060"/>
+            <!-- bawang goreng -->
+            <circle cx="120" cy="158" r="3" fill="#c28a4a"/>
+            <circle cx="150" cy="160" r="3" fill="#c28a4a"/>
+            <circle cx="170" cy="156" r="3" fill="#c28a4a"/>
+            <circle cx="185" cy="162" r="2.5" fill="#c28a4a"/>
+            <!-- sumpit -->
+            <line x1="210" y1="110" x2="240" y2="180" stroke="#a86f34" stroke-width="4" stroke-linecap="round"/>
+            <line x1="220" y1="108" x2="250" y2="178" stroke="#a86f34" stroke-width="4" stroke-linecap="round"/>
+            <text x="150" y="275" text-anchor="middle" font-family="Quicksand, sans-serif" font-size="18" font-weight="700" fill="#b45f2b">Mie Ayam</text>
+          </svg>
+        </div>
+        <div class="produk-konten">
+          <h2><span class="emoji-badge">🍜</span> Mie Ayam</h2>
+          <div class="harga">Rp 15.000 / porsi</div>
+          <p>
+            Mie kenyal dengan topping ayam kecap berbumbu, sawi hijau segar, dan telur rebus. 
+            Disajikan dengan kuah kaldu gurih yang hangat — pilihan tepat untuk makan siang atau malam.
+          </p>
+          <ul class="fitur">
+            <li>Mie kenyal & ayam kecap melimpah</li>
+            <li>Kuah kaldu gurih & sawi segar</li>
+            <li>Bisa request pedas / tanpa telur</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ===== PRODUK 3: ES KUWUT ===== -->
+      <article class="produk-card">
+        <div class="produk-gambar">
+          <!-- SVG Es Kuwut -->
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Es Kuwut">
+            <defs>
+              <linearGradient id="esGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#d4f0e8"/>
+                <stop offset="100%" stop-color="#a8d5c4"/>
+              </linearGradient>
+              <linearGradient id="gelasGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#eafaf5"/>
+                <stop offset="100%" stop-color="#c2e8d8"/>
+              </linearGradient>
+            </defs>
+            <!-- background -->
+            <circle cx="150" cy="150" r="140" fill="#fdf6ec"/>
+            <circle cx="150" cy="150" r="120" fill="#f9eddc"/>
+            <!-- gelas -->
+            <path d="M90 80 L100 230 Q102 245 150 245 Q198 245 200 230 L210 80 Z" fill="url(#gelasGrad)" stroke="#a8cbb8" stroke-width="2.5" opacity="0.95"/>
+            <!-- es serut / minuman -->
+            <path d="M93 90 L103 220 Q105 235 150 235 Q195 235 197 220 L207 90 Z" fill="url(#esGrad)" opacity="0.85"/>
+            <!-- kelapa muda (kuwut) -->
+            <circle cx="130" cy="150" r="12" fill="#fff8e7" opacity="0.9"/>
+            <circle cx="170" cy="140" r="10" fill="#fff8e7" opacity="0.9"/>
+            <circle cx="150" cy="180" r="11" fill="#fff8e7" opacity="0.9"/>
+            <circle cx="120" cy="190" r="9" fill="#fff8e7" opacity="0.85"/>
+            <circle cx="185" cy="175" r="8" fill="#fff8e7" opacity="0.85"/>
+            <!-- serutan kelapa muda (kuwut) -->
+            <path d="M115 130 Q125 120 135 128" stroke="#e8f0e8" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <path d="M160 120 Q170 112 180 120" stroke="#e8f0e8" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M140 165 Q150 155 160 163" stroke="#e8f0e8" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <!-- daun mint / hiasan -->
+            <path d="M180 110 Q190 95 200 105 Q192 115 180 110" fill="#5a9e4a"/>
+            <path d="M195 105 Q205 92 212 102 Q205 112 195 105" fill="#7aae5a"/>
+            <!-- jeruk nipis -->
+            <circle cx="110" cy="115" r="10" fill="#b8e04a" stroke="#9ac03a" stroke-width="1.5"/>
+            <path d="M105 112 L115 118 M115 112 L105 118" stroke="#8ab02a" stroke-width="1.5"/>
+            <!-- es batu -->
+            <rect x="140" y="100" width="14" height="14" rx="3" fill="#ffffff" opacity="0.6" transform="rotate(15 147 107)"/>
+            <rect x="175" y="145" width="12" height="12" rx="3" fill="#ffffff" opacity="0.5" transform="rotate(-10 181 151)"/>
+            <rect x="120" y="160" width="10" height="10" rx="2" fill="#ffffff" opacity="0.5"/>
+            <!-- sedotan -->
+            <line x1="170" y1="70" x2="190" y2="160" stroke="#e87a8a" stroke-width="5" stroke-linecap="round"/>
+            <line x1="175" y1="68" x2="195" y2="158" stroke="#f5a0ae" stroke-width="3" stroke-linecap="round"/>
+            <text x="150" y="275" text-anchor="middle" font-family="Quicksand, sans-serif" font-size="18" font-weight="700" fill="#b45f2b">Es Kuwut</text>
+          </svg>
+        </div>
+        <div class="produk-konten">
+          <h2><span class="emoji-badge">🥤</span> Es Kuwut</h2>
+          <div class="harga">Rp 10.000 / gelas</div>
+          <p>
+            Minuman segar khas Bali dari serutan kelapa muda (kuwut), air jeruk nipis, sirup, 
+            dan es serut. Rasa manis-asam yang menyegarkan — pelepas dahaga di siang hari.
+          </p>
+          <ul class="fitur">
+            <li>Kelapa muda asli & jeruk nipis segar</li>
+            <li>Manis, asam, dingin menyegarkan</li>
+            <li>Cocok untuk cuaca panas</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== KONTAK PERSON ===== -->
+    <section class="kontak-section">
+      <h2>📞 Hubungi Kami</h2>
+      <p class="subhead">Pemesanan & informasi — silakan hubungi kontak di bawah ini</p>
+      <div class="kontak-grid">
+        <!-- Kontak 1 -->
+        <div class="kontak-card">
+          <div class="nama">Ibu Siti Rahayu</div>
+          <div class="jabatan">Pemilik • Risol Mayo & Es Kuwut</div>
+          <div class="detail">
+            <a href="tel:+6281234567890">📱 +62 812-3456-7890 <span class="badge-wa">WA</span></a>
+            <a href="mailto:siti.rahayu@example.com">📧 siti.rahayu@example.com</a>
+          </div>
+        </div>
+        <!-- Kontak 2 -->
+        <div class="kontak-card">
+          <div class="nama">Bapak Andi Pratama</div>
+          <div class="jabatan">Koordinator • Mie Ayam</div>
+          <div class="detail">
+            <a href="tel:+6282198765432">📱 +62 821-9876-5432 <span class="badge-wa">WA</span></a>
+            <a href="mailto:andi.pratama@example.com">📧 andi.pratama@example.com</a>
+          </div>
+        </div>
+        <!-- Kontak 3 -->
+        <div class="kontak-card">
+          <div class="nama">Ibu Dewi Lestari</div>
+          <div class="jabatan">Pemesanan & Pengiriman</div>
+          <div class="detail">
+            <a href="tel:+6285678901234">📱 +62 856-7890-1234 <span class="badge-wa">WA</span></a>
+            <a href="#">📷 @kuliner_nusantara.id</a>
+          </div>
+        </div>
+      </div>
+      <!-- alamat -->
+      <div style="text-align: center; margin-top: 1.8rem; background: #f7efe6; padding: 0.7rem 1.5rem; border-radius: 60px; color: #5e4a35; font-weight: 500;">
+        🏠 Jl. Kuliner Nusantara No. 88, Yogyakarta • Buka setiap hari 09.00 – 21.00 WIB
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      🧡 Dibuat dengan cinta • Risol Mayo, Mie Ayam & Es Kuwut — fresh setiap hari 🧡
+    </footer>
+  </div>
+</body>
+</html>

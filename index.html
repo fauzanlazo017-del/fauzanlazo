@@ -1,579 +1,440 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cemilan Udang Keju — Lazo Store</title>
-<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cemila Udang Keju — Pesan Online</title>
 <style>
-  :root{
-    --orange:#f97316;
-    --orange-dark:#ea580c;
-    --cream:#fff7ed;
-    --yellow:#fbbf24;
-    --dark:#1f2937;
-    --gray:#6b7280;
-    --line:#e5e7eb;
-    --green:#16a34a;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
+  *{box-sizing:border-box;margin:0;padding:0}
   body{
     font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-    background:linear-gradient(180deg,#fff7ed 0%,#ffedd5 100%);
-    min-height:100vh;
-    color:var(--dark);
-    padding:16px 12px 60px;
+    background:linear-gradient(160deg,#FFF3D6 0%,#FFE0B2 45%,#FFD1A1 100%);
+    min-height:100vh;color:#2E1F16;padding:20px 14px 40px;
   }
-  .wrap{max-width:560px;margin:0 auto;}
+  .wrap{max-width:520px;margin:0 auto}
 
   /* ---------- HEADER ---------- */
-  header{
-    background:linear-gradient(135deg,var(--orange),var(--yellow));
-    border-radius:20px;
-    padding:22px 20px;
-    color:#fff;
-    box-shadow:0 10px 25px rgba(249,115,22,.35);
-    text-align:center;
-  }
-  header .logo{font-size:34px;line-height:1;}
-  header h1{font-size:21px;margin-top:6px;letter-spacing:.3px;}
-  header p{font-size:13px;opacity:.95;margin-top:4px;}
+  header{text-align:center;margin-bottom:16px}
+  .logo{font-size:40px;line-height:1}
+  h1{font-size:24px;letter-spacing:.4px;margin-top:6px}
+  h1 span{color:#FF8A3D}
+  .sub{font-size:13px;color:#8a7565;margin-top:4px}
 
-  /* ---------- STEPPER ---------- */
-  .steps{display:flex;gap:6px;margin:16px 0;}
-  .steps div{
-    flex:1;text-align:center;font-size:11px;font-weight:700;
-    padding:9px 4px;border-radius:12px;background:#fff;
-    color:var(--gray);border:2px solid transparent;transition:.25s;
+  /* ---------- STEP ---------- */
+  .steps{display:flex;gap:8px;margin:16px 0 18px}
+  .step{
+    flex:1;text-align:center;font-size:12px;font-weight:700;padding:9px 4px;
+    border-radius:12px;background:#fff;color:#b5a596;border:2px solid transparent;
+    transition:.25s;
   }
-  .steps div.active{background:var(--orange);color:#fff;box-shadow:0 6px 14px rgba(249,115,22,.3);}
-  .steps div.done{border-color:var(--orange);color:var(--orange-dark);}
+  .step.active{background:#FF8A3D;color:#fff;box-shadow:0 6px 14px rgba(255,138,61,.35)}
+  .step.done{background:#fff;color:#FF8A3D;border-color:#FF8A3D}
 
   /* ---------- CARD ---------- */
   .card{
-    background:#fff;border-radius:18px;padding:20px;
-    box-shadow:0 6px 20px rgba(0,0,0,.07);
-    margin-bottom:16px;
+    background:#fff;border-radius:22px;padding:20px;
+    box-shadow:0 12px 30px rgba(180,120,60,.15);
+    animation:pop .3s ease;
   }
-  .card h2{font-size:17px;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-  .card h2 span{font-size:20px;}
+  @keyframes pop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .card h2{font-size:17px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .card h2::before{content:'';width:6px;height:20px;background:#FFC93C;border-radius:4px}
 
-  .page{display:none;}
-  .page.active{display:block;animation:fade .3s ease;}
-  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-  /* ---------- FORM ---------- */
-  label{display:block;font-size:13px;font-weight:600;margin:12px 0 6px;}
-  label .req{color:#ef4444;}
-  input[type=text],input[type=tel],textarea{
-    width:100%;padding:12px 14px;border:2px solid var(--line);
-    border-radius:12px;font-size:14px;font-family:inherit;
-    background:#fafafa;transition:.2s;outline:none;
+  label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px;color:#5b4638}
+  input,textarea{
+    width:100%;padding:12px 14px;border:2px solid #F0E4D4;border-radius:14px;
+    font-size:15px;font-family:inherit;background:#FFFDF8;transition:.2s;outline:none;
   }
-  input:focus,textarea:focus{border-color:var(--orange);background:#fff;}
-  textarea{resize:vertical;min-height:70px;}
+  input:focus,textarea:focus{border-color:#FFC93C;background:#fff}
+  textarea{resize:vertical;min-height:70px}
+
+  .btn{
+    width:100%;border:none;padding:15px;border-radius:16px;font-size:16px;
+    font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;margin-top:18px;
+  }
+  .btn-main{background:linear-gradient(135deg,#FFC93C,#FF8A3D);color:#fff;
+    box-shadow:0 8px 20px rgba(255,138,61,.35)}
+  .btn-main:active{transform:scale(.98)}
+  .btn-ghost{background:#FFF3E0;color:#FF8A3D;margin-top:10px}
 
   /* ---------- MENU ---------- */
   .menu-item{
-    display:flex;gap:12px;align-items:center;
-    padding:12px;border:2px solid var(--line);border-radius:14px;
-    margin-bottom:10px;transition:.2s;
+    display:flex;gap:14px;align-items:center;padding:14px;
+    border:2px solid #FFE7C2;border-radius:18px;background:#FFFBF3;
   }
-  .menu-item.on{border-color:var(--orange);background:#fff7ed;}
-  .thumb{
-    width:56px;height:56px;flex:0 0 56px;border-radius:12px;
-    background:linear-gradient(135deg,#fde68a,#fbbf24);
-    display:grid;place-items:center;font-size:26px;
+  .menu-thumb{
+    width:74px;height:74px;flex:0 0 74px;border-radius:16px;
+    background:linear-gradient(135deg,#FFD86B,#FF9E4A);
+    display:flex;align-items:center;justify-content:center;font-size:34px;
   }
-  .menu-info{flex:1;min-width:0;}
-  .menu-info b{font-size:14px;display:block;}
-  .menu-info small{font-size:11.5px;color:var(--gray);display:block;margin-top:2px;line-height:1.35;}
-  .menu-info .price{color:var(--orange-dark);font-weight:800;font-size:14px;margin-top:4px;display:block;}
+  .menu-name{font-size:16px;font-weight:800}
+  .menu-desc{font-size:12px;color:#9c8878;margin-top:2px;line-height:1.4}
+  .menu-price{font-size:17px;font-weight:800;color:#FF6B00;margin-top:6px}
 
-  .qty{display:flex;align-items:center;gap:8px;flex:0 0 auto;}
-  .qty button{
-    width:30px;height:30px;border-radius:9px;border:none;cursor:pointer;
-    background:var(--orange);color:#fff;font-size:17px;font-weight:700;
-    display:grid;place-items:center;transition:.15s;
+  /* ---------- QTY ---------- */
+  .qty-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px}
+  .qty-row span{font-size:14px;font-weight:700;color:#5b4638}
+  .qty-ctrl{display:flex;align-items:center;gap:12px}
+  .qty-btn{
+    width:38px;height:38px;border-radius:12px;border:none;font-size:20px;font-weight:800;
+    background:#FFE9C7;color:#FF8A3D;cursor:pointer;transition:.15s;
   }
-  .qty button:active{transform:scale(.9);}
-  .qty button.minus{background:#fee2e2;color:#dc2626;}
-  .qty span{min-width:20px;text-align:center;font-weight:700;font-size:14px;}
+  .qty-btn:active{transform:scale(.9)}
+  .qty-val{font-size:18px;font-weight:800;min-width:26px;text-align:center}
 
   /* ---------- PAYMENT ---------- */
   .pay-opt{
-    display:flex;align-items:center;gap:12px;padding:14px;
-    border:2px solid var(--line);border-radius:14px;margin-bottom:10px;
-    cursor:pointer;transition:.2s;
+    display:flex;align-items:center;gap:12px;padding:13px 14px;margin-top:10px;
+    border:2px solid #F0E4D4;border-radius:16px;cursor:pointer;transition:.2s;background:#FFFDF8;
   }
-  .pay-opt.on{border-color:var(--orange);background:#fff7ed;}
-  .pay-opt .ic{font-size:22px;width:32px;text-align:center;}
-  .pay-opt .txt{flex:1;}
-  .pay-opt .txt b{font-size:14px;display:block;}
-  .pay-opt .txt small{font-size:11.5px;color:var(--gray);}
-  .pay-opt .dot{
-    width:20px;height:20px;border-radius:50%;border:2px solid #d1d5db;
-    display:grid;place-items:center;flex:0 0 auto;
-  }
-  .pay-opt.on .dot{border-color:var(--orange);}
-  .pay-opt.on .dot::after{content:'';width:10px;height:10px;border-radius:50%;background:var(--orange);}
+  .pay-opt:hover{border-color:#FFD86B}
+  .pay-opt.selected{border-color:#FF8A3D;background:#FFF6E9;box-shadow:0 4px 12px rgba(255,138,61,.15)}
+  .pay-opt input{width:auto;accent-color:#FF8A3D;transform:scale(1.2)}
+  .pay-icon{font-size:22px}
+  .pay-title{font-size:14px;font-weight:700}
+  .pay-sub{font-size:11.5px;color:#9c8878}
 
-  .detail-box{
-    display:none;background:#fff7ed;border:1.5px dashed var(--orange);
-    border-radius:14px;padding:16px;margin-bottom:10px;text-align:center;
+  .pay-detail{
+    margin-top:12px;padding:14px;border-radius:16px;background:#FFF6E9;
+    border:1px dashed #FFC93C;font-size:13.5px;line-height:1.6;display:none;
   }
-  .detail-box.show{display:block;}
-  .detail-box .rek{
-    font-size:22px;font-weight:800;letter-spacing:1.5px;color:var(--orange-dark);
-    margin:6px 0;
+  .pay-detail.show{display:block;animation:pop .25s ease}
+  .rek{font-size:17px;font-weight:800;letter-spacing:1px;color:#1a4b8c}
+  .copy-btn{
+    margin-top:8px;padding:8px 14px;border-radius:10px;border:none;background:#1a4b8c;
+    color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;
   }
-  .detail-box .an{font-size:12.5px;color:var(--gray);}
-  .btn-copy{
-    margin-top:12px;padding:9px 18px;border:none;border-radius:10px;
-    background:var(--orange);color:#fff;font-weight:700;font-size:13px;cursor:pointer;
-  }
-  .btn-copy:active{transform:scale(.96);}
-  #qrisBox{display:inline-block;background:#fff;padding:10px;border-radius:12px;margin-top:10px;}
-  #qrisBox img,#qrisBox canvas{display:block;border-radius:6px;}
+  .qris-box{text-align:center}
+  .qris-box img{width:230px;height:230px;border-radius:14px;background:#fff;padding:8px;
+    border:1px solid #eee}
+  .qris-note{font-size:11.5px;color:#9c8878;margin-top:8px;word-break:break-all}
 
-  /* ---------- SUMMARY ---------- */
-  .sum-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;color:#374151;}
-  .sum-row.total{
-    border-top:2px dashed var(--line);margin-top:8px;padding-top:12px;
-    font-size:17px;font-weight:800;color:var(--orange-dark);
+  /* ---------- TOTAL ---------- */
+  .total-box{
+    margin-top:18px;padding:16px;border-radius:18px;
+    background:linear-gradient(135deg,#2E1F16,#4a3325);color:#fff;
+    display:flex;justify-content:space-between;align-items:center;
   }
-  .empty{font-size:13px;color:var(--gray);text-align:center;padding:14px 0;}
+  .total-box small{font-size:12px;opacity:.75;display:block}
+  .total-box .amount{font-size:22px;font-weight:800;color:#FFC93C}
 
-  /* ---------- BUTTONS ---------- */
-  .btn{
-    width:100%;padding:15px;border:none;border-radius:14px;
-    font-size:15px;font-weight:800;cursor:pointer;transition:.2s;
-    font-family:inherit;letter-spacing:.3px;
+  /* ---------- FOOTER ---------- */
+  footer{margin-top:26px;text-align:center;font-size:12px;color:#8a7565;line-height:1.9}
+  footer b{color:#5b4638}
+  .admin-links{display:flex;gap:10px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+  .admin-links a{
+    text-decoration:none;background:#fff;color:#25D366;font-weight:800;font-size:12.5px;
+    padding:9px 15px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.07);
   }
-  .btn-primary{background:linear-gradient(135deg,var(--orange),var(--orange-dark));color:#fff;
-    box-shadow:0 8px 18px rgba(249,115,22,.35);}
-  .btn-primary:active{transform:scale(.98);}
-  .btn-ghost{background:#fff;color:var(--orange-dark);border:2px solid var(--orange);}
-  .row2{display:flex;gap:10px;}
-  .row2 .btn{flex:1;}
-
-  /* ---------- CONTACT ---------- */
-  .contact{
-    background:#1f2937;color:#fff;border-radius:18px;padding:18px;
-    text-align:center;margin-top:6px;
-  }
-  .contact h3{font-size:14px;margin-bottom:4px;}
-  .contact p{font-size:11.5px;color:#9ca3af;margin-bottom:12px;}
-  .c-links{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-  .c-links a{
-    display:inline-flex;align-items:center;gap:7px;text-decoration:none;
-    background:#25D366;color:#fff;font-weight:700;font-size:12.5px;
-    padding:10px 15px;border-radius:11px;transition:.2s;
-  }
-  .c-links a:active{transform:scale(.96);}
-  .c-links a.alt{background:#374151;}
-
-  /* ---------- TOAST ---------- */
-  #toast{
-    position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);
-    background:#1f2937;color:#fff;padding:12px 22px;border-radius:12px;
-    font-size:13px;font-weight:600;opacity:0;transition:.3s;z-index:99;pointer-events:none;
-  }
-  #toast.show{opacity:1;transform:translate(-50%,0);}
-
-  .note{font-size:11.5px;color:var(--gray);margin-top:10px;line-height:1.5;}
-  .err{border-color:#ef4444 !important;background:#fef2f2 !important;}
+  .hidden-flag{font-size:10.5px;color:#c0ad9d;margin-top:10px;font-style:italic}
+  .err{color:#e04141;font-size:12px;margin-top:6px;display:none}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- ============ HEADER ============ -->
+  <!-- ================= HEADER ================= -->
   <header>
-    <div class="logo">🦐🧀</div>
-    <h1>Cemilan Udang Keju</h1>
-    <p>Lazo Store • Kab. Bangkalan • Rp6.000 / porsi</p>
+    <div class="logo">🍤🧀</div>
+    <h1>Cemila <span>Udang Keju</span></h1>
+    <div class="sub">Udang segar berbalut keju leleh • Kab. Bangkalan</div>
   </header>
 
-  <!-- ============ STEPPER ============ -->
+  <!-- ================= STEP ================= -->
   <div class="steps">
-    <div id="st1" class="active">1. Data Pembeli</div>
-    <div id="st2">2. Pilih Menu</div>
-    <div id="st3">3. Pembayaran</div>
+    <div class="step active" id="step1">1 · Data Pembeli</div>
+    <div class="step" id="step2">2 · Menu &amp; Pembayaran</div>
   </div>
 
   <!-- ============================================================
        HALAMAN 1 — DATA PEMBELI
   ============================================================= -->
-  <section id="page1" class="page active">
-    <div class="card">
-      <h2><span>📝</span> Data Pembeli</h2>
-      <p class="note" style="margin-top:-6px;margin-bottom:4px;">
-        Isi data dengan benar agar pesanan mudah diproses & diantar.
-      </p>
+  <section id="page1" class="card">
+    <h2>Data Pembeli</h2>
 
-      <label>Nama Lengkap <span class="req">*</span></label>
-      <input type="text" id="nama" placeholder="Contoh: Umi Faizah" autocomplete="name">
+    <label for="nama">Nama Lengkap *</label>
+    <input type="text" id="nama" placeholder="Contoh: Siti Aminah" />
 
-      <label>No. WhatsApp / HP <span class="req">*</span></label>
-      <input type="tel" id="hp" placeholder="Contoh: 081234567890" inputmode="numeric" autocomplete="tel">
+    <label for="hp">No. WhatsApp / HP *</label>
+    <input type="tel" id="hp" placeholder="Contoh: 0812xxxxxxx" inputmode="numeric" />
 
-      <label>Alamat Pengiriman <span class="req">*</span></label>
-      <textarea id="alamat" placeholder="Contoh: Jl. Raya Burneh No.12, RT02/RW03, Kec. Burneh, Bangkalan"></textarea>
+    <label for="alamat">Alamat Pengiriman *</label>
+    <textarea id="alamat" placeholder="Nama jalan, RT/RW, desa, kecamatan..."></textarea>
 
-      <label>Catatan (opsional)</label>
-      <input type="text" id="catatan" placeholder="Contoh: jangan terlalu pedas / tanpa saus">
-    </div>
+    <label for="catatan">Catatan (opsional)</label>
+    <textarea id="catatan" placeholder="Contoh: pedasnya dipisah, jangan terlalu garing..."></textarea>
 
-    <button class="btn btn-primary" onclick="keMenu()">Lanjut Pilih Menu →</button>
+    <div class="err" id="err1">Mohon lengkapi Nama, No. HP, dan Alamat terlebih dahulu.</div>
+
+    <button class="btn btn-main" onclick="keMenu()">Lanjut ke Menu →</button>
   </section>
 
   <!-- ============================================================
-       HALAMAN 2 — MENU & HARGA
+       HALAMAN 2 — MENU & PEMBAYARAN
   ============================================================= -->
-  <section id="page2" class="page">
-    <div class="card">
-      <h2><span>🍽️</span> Pilih Menu</h2>
-      <p class="note" style="margin-top:-6px;margin-bottom:14px;">
-        Semua varian <b>Rp6.000 / porsi</b>. Atur jumlah dengan tombol − / +.
-      </p>
-      <div id="menuList"></div>
+  <section id="page2" class="card" style="display:none">
+    <h2>Menu &amp; Pembayaran</h2>
+
+    <!-- ---- MENU (HANYA 1 MENU) ---- -->
+    <div class="menu-item">
+      <div class="menu-thumb">🍤</div>
+      <div>
+        <div class="menu-name">Udang Keju</div>
+        <div class="menu-desc">Udang pilihan berbalut keju mozzarella, garing di luar, lumer di dalam.</div>
+        <div class="menu-price">Rp6.000 <span style="font-size:12px;color:#9c8878;font-weight:600">/ porsi</span></div>
+      </div>
     </div>
 
-    <div class="row2">
-      <button class="btn btn-ghost" onclick="kePembeli()">← Kembali</button>
-      <button class="btn btn-primary" onclick="keBayar()">Lanjut Bayar →</button>
+    <!-- ---- JUMLAH ---- -->
+    <div class="qty-row">
+      <span>Jumlah Porsi</span>
+      <div class="qty-ctrl">
+        <button class="qty-btn" onclick="ubahQty(-1)">−</button>
+        <div class="qty-val" id="qtyVal">1</div>
+        <button class="qty-btn" onclick="ubahQty(1)">+</button>
+      </div>
     </div>
+
+    <!-- ---- METODE PEMBAYARAN ---- -->
+    <label style="margin-top:20px">Metode Pembayaran</label>
+
+    <label class="pay-opt selected" id="opt-cod">
+      <input type="radio" name="bayar" value="COD" checked onchange="pilihBayar('COD')" />
+      <span class="pay-icon">🛵</span>
+      <span>
+        <span class="pay-title">COD (Bayar di Tempat)</span><br />
+        <span class="pay-sub">Bayar saat pesanan diantar</span>
+      </span>
+    </label>
+
+    <label class="pay-opt" id="opt-bni">
+      <input type="radio" name="bayar" value="Transfer BNI" onchange="pilihBayar('BNI')" />
+      <span class="pay-icon">🏦</span>
+      <span>
+        <span class="pay-title">Transfer Bank BNI</span><br />
+        <span class="pay-sub">Rek. 1888719845</span>
+      </span>
+    </label>
+
+    <label class="pay-opt" id="opt-qris">
+      <input type="radio" name="bayar" value="QRIS" onchange="pilihBayar('QRIS')" />
+      <span class="pay-icon">📱</span>
+      <span>
+        <span class="pay-title">QRIS (DANA / OVO / GoPay / dll)</span><br />
+        <span class="pay-sub">Scan kode, bayar dari aplikasi apa saja</span>
+      </span>
+    </label>
+
+    <!-- ---- DETAIL BNI ---- -->
+    <div class="pay-detail" id="detail-BNI">
+      <div>Silakan transfer ke rekening berikut:</div>
+      <div style="margin-top:6px">Bank <b>BNI</b></div>
+      <div class="rek">1888719845</div>
+      <div style="font-size:12.5px;color:#8a7565">a.n. Lazo Store</div>
+      <button class="copy-btn" onclick="copyRek()">📋 Salin No. Rekening</button>
+      <div style="font-size:12px;color:#9c8878;margin-top:10px">
+        Setelah transfer, kirim bukti via WhatsApp ya 🙏
+      </div>
+    </div>
+
+    <!-- ---- DETAIL QRIS ---- -->
+    <div class="pay-detail" id="detail-QRIS">
+      <div class="qris-box">
+        <div style="font-weight:800;margin-bottom:8px">Scan QRIS di bawah ini</div>
+        <img id="qrisImg" alt="QRIS Lazo Store" />
+        <div class="qris-note" id="qrisNote">
+          Merchant: <b>lazo store</b> — Kab. Bangkalan
+        </div>
+        <div style="font-size:12px;color:#9c8878;margin-top:8px">
+          Nominal menyesuaikan total pesanan: <b id="qrisTotal">Rp6.000</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- TOTAL ---- -->
+    <div class="total-box">
+      <div>
+        <small id="totalQty">1 porsi × Rp6.000</small>
+        <span>Total Bayar</span>
+      </div>
+      <div class="amount" id="totalHarga">Rp6.000</div>
+    </div>
+
+    <button class="btn btn-main" onclick="kirimWA()">📲 Pesan Sekarang via WhatsApp</button>
+    <button class="btn btn-ghost" onclick="kembali()">← Kembali ke Data Pembeli</button>
   </section>
 
-  <!-- ============================================================
-       HALAMAN 3 — PEMBAYARAN
-  ============================================================= -->
-  <section id="page3" class="page">
-    <div class="card">
-      <h2><span>💳</span> Metode Pembayaran</h2>
-
-      <!-- COD -->
-      <div class="pay-opt" data-pay="COD" onclick="pilihBayar('COD')">
-        <div class="ic">🛵</div>
-        <div class="txt">
-          <b>COD (Bayar di Tempat)</b>
-          <small>Bayar tunai saat pesanan diantar</small>
-        </div>
-        <div class="dot"></div>
-      </div>
-
-      <!-- TRANSFER BNI -->
-      <div class="pay-opt" data-pay="Transfer BNI" onclick="pilihBayar('Transfer BNI')">
-        <div class="ic">🏦</div>
-        <div class="txt">
-          <b>Transfer Bank BNI</b>
-          <small>Rek. 1888719845</small>
-        </div>
-        <div class="dot"></div>
-      </div>
-
-      <!-- QRIS -->
-      <div class="pay-opt" data-pay="QRIS" onclick="pilihBayar('QRIS')">
-        <div class="ic">📱</div>
-        <div class="txt">
-          <b>QRIS (Semua E-Wallet)</b>
-          <small>DANA, OVO, GoPay, ShopeePay, dll</small>
-        </div>
-        <div class="dot"></div>
-      </div>
-
-      <!-- Detail BNI -->
-      <div class="detail-box" id="boxBNI">
-        <small style="color:#6b7280;font-weight:700;">TRANSFER KE REKENING BNI</small>
-        <div class="rek">1888719845</div>
-        <div class="an">a.n. Lazo Store</div>
-        <button class="btn-copy" onclick="copyRek()">📋 Salin No. Rekening</button>
-        <p class="note">Kirim bukti transfer ke WhatsApp kami setelah melakukan pembayaran.</p>
-      </div>
-
-      <!-- Detail QRIS -->
-      <div class="detail-box" id="boxQRIS">
-        <small style="color:#6b7280;font-weight:700;">SCAN QRIS UNTUK BAYAR</small>
-        <div id="qrisBox"></div>
-        <p class="note" style="margin-top:10px;">
-          Merchant: <b>lazo store</b><br>Kab. Bangkalan<br>
-          Bisa scan pakai DANA, OVO, GoPay, ShopeePay, Mobile Banking.
-        </p>
-      </div>
-    </div>
-
-    <!-- RINGKASAN -->
-    <div class="card">
-      <h2><span>🧾</span> Ringkasan Pesanan</h2>
-      <div id="summary"></div>
-    </div>
-
-    <div class="row2">
-      <button class="btn btn-ghost" onclick="keMenuDariBayar()">← Kembali</button>
-      <button class="btn btn-primary" onclick="kirimPesanan()">✅ Kirim Pesanan</button>
-    </div>
-  </section>
-
-  <!-- ============ KONTAK PERSON ============ -->
-  <div class="contact">
-    <h3>📞 Kontak Person (di balik layar)</h3>
-    <p>Ada pertanyaan? Hubungi kami langsung via WhatsApp</p>
-    <div class="c-links">
+  <!-- ================= FOOTER / KONTAK ================= -->
+  <footer>
+    <div>Butuh bantuan? Hubungi <b>admin di balik layar</b>:</div>
+    <div class="admin-links">
       <a href="https://wa.me/6281996877864" target="_blank">💬 0819-9687-7864</a>
-      <a class="alt" href="https://wa.me/6287755061109" target="_blank">💬 0877-5506-1109</a>
+      <a href="https://wa.me/6287755061109" target="_blank">💬 0877-5506-1109</a>
     </div>
-  </div>
+    <div class="hidden-flag">Cemila Udang Keju © 2025 — Kab. Bangkalan</div>
+  </footer>
 
 </div>
 
-<div id="toast"></div>
-
 <script>
-/* ============================================================
-   DATA MENU  (ubah / tambah di sini kalau perlu)
-============================================================ */
-const MENU = [
-  { id:'ori',  nama:'Udang Keju Original',     desc:'Udang segar + keju lembut, crispy di luar', harga:6000, emoji:'🦐' },
-  { id:'pedas',nama:'Udang Keju Pedas',        desc:'Sensasi pedas gurih, cocok buat pecinta pedas', harga:6000, emoji:'🌶️' },
-  { id:'mozza',nama:'Udang Keju Mozzarella',   desc:'Keju mozzarella lumer & melar', harga:6000, emoji:'🧀' },
-  { id:'mix',  nama:'Udang Keju Mix (Isi 5)',  desc:'Paket hemat isi 5 pcs aneka rasa', harga:6000, emoji:'🍱' }
-];
+/* =========================================================
+   KONFIGURASI
+========================================================= */
+const HARGA = 6000;                       // harga per porsi
+const NO_ADMIN = "6281996877864";         // nomor tujuan pesanan (081996877864)
 
-/* ============================================================
-   DATA TOKO
-============================================================ */
-const QRIS_STRING = "00020101021126570011ID.DANA.WWW011893600915302416532302090241653230303UMI51440014ID.CO.QRIS.WWW0215ID10265109589980303UMI5204654053033605802ID5910lazo store6014Kab. Bangkalan61056916563043323";
+/* Payload QRIS dari merchant "lazo store" */
+const QRIS_DATA = "00020101021126570011ID.DANA.WWW011893600915302416532302090241653230303UMI51440014ID.CO.QRIS.WWW0215ID10265109589980303UMI5204654053033605802ID5910lazo store6014Kab. Bangkalan61056916563043323";
 
-const WA_ADMIN   = "6281996877864";   // 081996877864
-const REK_BNI    = "1888719845";
-const HARGA      = 6000;
+let qty = 1;
+let metode = "COD";
 
-/* ============================================================
-   STATE
-============================================================ */
-const cart = {};          // { idMenu: qty }
-let metodeBayar = "";
-
-/* ============================================================
-   UTIL
-============================================================ */
-const rp = n => "Rp" + n.toLocaleString('id-ID');
-
-function toast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(t._t);
-  t._t = setTimeout(()=>t.classList.remove('show'), 2200);
-}
-
-function setStep(n){
-  document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('active', i===n-1));
-  for(let i=1;i<=3;i++){
-    const el = document.getElementById('st'+i);
-    el.classList.remove('active','done');
-    if(i < n) el.classList.add('done');
-    if(i === n) el.classList.add('active');
-  }
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-
-/* ============================================================
-   RENDER MENU
-============================================================ */
-function renderMenu(){
-  const box = document.getElementById('menuList');
-  box.innerHTML = MENU.map(m => `
-    <div class="menu-item ${cart[m.id] ? 'on':''}" id="mi-${m.id}">
-      <div class="thumb">${m.emoji}</div>
-      <div class="menu-info">
-        <b>${m.nama}</b>
-        <small>${m.desc}</small>
-        <span class="price">${rp(m.harga)}</span>
-      </div>
-      <div class="qty">
-        <button class="minus" onclick="ubahQty('${m.id}',-1)">−</button>
-        <span id="q-${m.id}">${cart[m.id]||0}</span>
-        <button onclick="ubahQty('${m.id}',1)">+</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function ubahQty(id, delta){
-  cart[id] = (cart[id]||0) + delta;
-  if(cart[id] < 0) cart[id] = 0;
-  if(cart[id] === 0) delete cart[id];
-  document.getElementById('q-'+id).textContent = cart[id]||0;
-  document.getElementById('mi-'+id).classList.toggle('on', !!cart[id]);
-}
-
-/* ============================================================
-   HITUNG
-============================================================ */
-function hitung(){
-  let total = 0, qty = 0;
-  const items = [];
-  MENU.forEach(m=>{
-    const q = cart[m.id]||0;
-    if(q>0){
-      total += q*m.harga;
-      qty += q;
-      items.push({...m, qty:q, subtotal:q*m.harga});
-    }
-  });
-  return {items, total, qty};
-}
-
-function renderSummary(){
-  const {items, total, qty} = hitung();
-  const box = document.getElementById('summary');
-
-  if(!items.length){
-    box.innerHTML = `<p class="empty">Belum ada menu yang dipilih.</p>`;
-    return;
-  }
-  box.innerHTML = items.map(i=>`
-    <div class="sum-row">
-      <span>${i.emoji} ${i.nama} × ${i.qty}</span>
-      <span>${rp(i.subtotal)}</span>
-    </div>
-  `).join('') + `
-    <div class="sum-row"><span>Total item</span><span>${qty} porsi</span></div>
-    <div class="sum-row total"><span>TOTAL</span><span>${rp(total)}</span></div>
-    <div class="sum-row" style="font-size:12px;">
-      <span>Metode bayar</span>
-      <span><b>${metodeBayar || '— belum dipilih —'}</b></span>
-    </div>
-  `;
-}
-
-/* ============================================================
-   PEMBAYARAN
-============================================================ */
-function pilihBayar(m){
-  metodeBayar = m;
-  document.querySelectorAll('.pay-opt').forEach(el=>{
-    el.classList.toggle('on', el.dataset.pay === m);
-  });
-  document.getElementById('boxBNI').classList.toggle('show', m === 'Transfer BNI');
-  document.getElementById('boxQRIS').classList.toggle('show', m === 'QRIS');
-  if(m === 'QRIS') bikinQRIS();
-  renderSummary();
-}
-
-let qrisDibuat = false;
-function bikinQRIS(){
-  if(qrisDibuat) return;
-  const box = document.getElementById('qrisBox');
-  box.innerHTML = '';
-  try{
-    new QRCode(box, {
-      text: QRIS_STRING,
-      width: 220,
-      height: 220,
-      colorDark: "#111111",
-      colorLight: "#ffffff",
-      correctLevel: QRCode.CorrectLevel.L
-    });
-    qrisDibuat = true;
-  }catch(e){
-    box.innerHTML = `<p style="font-size:12px;color:#dc2626;">
-      Gagal memuat QR. Hubungi admin: 081996877864</p>`;
-  }
-}
-
-function copyRek(){
-  navigator.clipboard.writeText(REK_BNI).then(()=>{
-    toast("No. rekening BNI disalin ✓");
-  }).catch(()=>{
-    toast("Salin manual: " + REK_BNI);
-  });
-}
-
-/* ============================================================
-   NAVIGASI + VALIDASI
-============================================================ */
+/* =========================================================
+   NAVIGASI HALAMAN
+========================================================= */
 function keMenu(){
-  const nama   = document.getElementById('nama');
-  const hp     = document.getElementById('hp');
-  const alamat = document.getElementById('alamat');
-  let ok = true;
-
-  [nama, hp, alamat].forEach(el=>el.classList.remove('err'));
-
-  if(!nama.value.trim()){ nama.classList.add('err'); ok=false; }
-  if(!/^[0-9+\-\s]{9,16}$/.test(hp.value.trim())){ hp.classList.add('err'); ok=false; }
-  if(!alamat.value.trim()){ alamat.classList.add('err'); ok=false; }
-
-  if(!ok){ toast("Lengkapi data pembeli dulu ya ⚠️"); return; }
-  setStep(2);
-}
-
-function kePembeli(){ setStep(1); }
-
-function keBayar(){
-  if(!hitung().items.length){ toast("Pilih minimal 1 menu dulu 🍤"); return; }
-  renderSummary();
-  setStep(3);
-}
-
-function keMenuDariBayar(){ setStep(2); }
-
-/* ============================================================
-   KIRIM PESANAN → WHATSAPP
-============================================================ */
-function kirimPesanan(){
-  const {items, total, qty} = hitung();
-
-  if(!items.length){ toast("Pilih menu dulu 🍤"); setStep(2); return; }
-  if(!metodeBayar){ toast("Pilih metode pembayaran dulu 💳"); return; }
-
   const nama   = document.getElementById('nama').value.trim();
   const hp     = document.getElementById('hp').value.trim();
   const alamat = document.getElementById('alamat').value.trim();
-  const catatan= document.getElementById('catatan').value.trim() || '-';
+  const err    = document.getElementById('err1');
 
-  let pesan = "";
-  pesan += "*🦐🧀 PESANAN CEMILAN UDANG KEJU 🧀🦐*\n";
-  pesan += "━━━━━━━━━━━━━━━━━━\n";
-  pesan += "*DATA PEMBELI*\n";
-  pesan += `Nama     : ${nama}\n`;
-  pesan += `No. HP   : ${hp}\n`;
-  pesan += `Alamat   : ${alamat}\n`;
-  pesan += `Catatan  : ${catatan}\n`;
-  pesan += "━━━━━━━━━━━━━━━━━━\n";
-  pesan += "*DETAIL PESANAN*\n";
-  items.forEach(i=>{
-    pesan += `• ${i.nama} × ${i.qty} = ${rp(i.subtotal)}\n`;
-  });
-  pesan += `\nJumlah   : ${qty} porsi\n`;
-  pesan += `*TOTAL    : ${rp(total)}*\n`;
-  pesan += "━━━━━━━━━━━━━━━━━━\n";
-  pesan += `*METODE BAYAR : ${metodeBayar}*\n`;
-
-  if(metodeBayar === "Transfer BNI"){
-    pesan += `Transfer ke BNI ${REK_BNI} (a.n. Lazo Store)\n`;
-    pesan += `_Bukti transfer akan saya kirim menyusul._\n`;
-  } else if(metodeBayar === "QRIS"){
-    pesan += `_Saya bayar via QRIS (lazo store). Bukti akan saya kirim._\n`;
-  } else {
-    pesan += `_Bayar tunai saat pesanan diantar._\n`;
+  if(!nama || !hp || !alamat){
+    err.style.display = 'block';
+    return;
   }
+  err.style.display = 'none';
 
-  pesan += "━━━━━━━━━━━━━━━━━━\n";
-  pesan += "Mohon dikonfirmasi ya, terima kasih 🙏";
+  document.getElementById('page1').style.display = 'none';
+  document.getElementById('page2').style.display = 'block';
 
-  const url = `https://wa.me/${WA_ADMIN}?text=${encodeURIComponent(pesan)}`;
-  window.open(url, '_blank');
+  document.getElementById('step1').classList.remove('active');
+  document.getElementById('step1').classList.add('done');
+  document.getElementById('step2').classList.add('active');
+
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
-/* ============================================================
-   INIT
-============================================================ */
-renderMenu();
-renderSummary();
+function kembali(){
+  document.getElementById('page2').style.display = 'none';
+  document.getElementById('page1').style.display = 'block';
+
+  document.getElementById('step2').classList.remove('active');
+  document.getElementById('step1').classList.remove('done');
+  document.getElementById('step1').classList.add('active');
+
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* =========================================================
+   JUMLAH PORSI & TOTAL
+========================================================= */
+function ubahQty(delta){
+  qty += delta;
+  if(qty < 1) qty = 1;
+  if(qty > 99) qty = 99;
+  renderTotal();
+}
+
+function rupiah(n){
+  return "Rp" + n.toLocaleString('id-ID');
+}
+
+function renderTotal(){
+  const total = qty * HARGA;
+  document.getElementById('qtyVal').textContent    = qty;
+  document.getElementById('totalQty').textContent  = qty + " porsi × " + rupiah(HARGA);
+  document.getElementById('totalHarga').textContent= rupiah(total);
+  document.getElementById('qrisTotal').textContent = rupiah(total);
+}
+
+/* =========================================================
+   METODE PEMBAYARAN
+========================================================= */
+function pilihBayar(m){
+  metode = m;
+
+  ['cod','bni','qris'].forEach(id =>
+    document.getElementById('opt-' + id).classList.remove('selected')
+  );
+  document.getElementById('opt-' + m.toLowerCase()).classList.add('selected');
+
+  document.getElementById('detail-BNI').classList.remove('show');
+  document.getElementById('detail-QRIS').classList.remove('show');
+
+  if(m === 'BNI')  document.getElementById('detail-BNI').classList.add('show');
+  if(m === 'QRIS') document.getElementById('detail-QRIS').classList.add('show');
+}
+
+/* =========================================================
+   QRIS — generate gambar QR dari payload
+========================================================= */
+(function generateQRIS(){
+  const img = document.getElementById('qrisImg');
+  const url = "https://api.qrserver.com/v1/create-qr-code/?size=460x460&margin=12&data="
+              + encodeURIComponent(QRIS_DATA);
+  img.src = url;
+
+  img.onerror = function(){
+    // fallback kalau gambar gagal dimuat
+    img.style.display = 'none';
+    document.getElementById('qrisNote').innerHTML =
+      "Gagal memuat gambar QR. Kirim kode QRIS berikut ke admin:<br>" +
+      "<textarea readonly style='margin-top:8px;font-size:10px;height:70px'>" +
+      QRIS_DATA + "</textarea>";
+  };
+})();
+
+/* =========================================================
+   COPY REKENING
+========================================================= */
+function copyRek(){
+  const rek = "1888719845";
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(rek).then(
+      () => alert("No. rekening BNI " + rek + " berhasil disalin ✅"),
+      () => alert("No. rekening BNI: " + rek)
+    );
+  } else {
+    alert("No. rekening BNI: " + rek);
+  }
+}
+
+/* =========================================================
+   KIRIM PESANAN KE WHATSAPP
+========================================================= */
+function kirimWA(){
+  const nama   = document.getElementById('nama').value.trim();
+  const hp     = document.getElementById('hp').value.trim();
+  const alamat = document.getElementById('alamat').value.trim();
+  const catatan= document.getElementById('catatan').value.trim();
+  const total  = qty * HARGA;
+
+  let pesan = "";
+  pesan += "Halo *Cemila Udang Keju* 🍤🧀\n";
+  pesan += "Saya mau pesan:\n\n";
+  pesan += "*MENU*\n";
+  pesan += "• Udang Keju × " + qty + " porsi = " + rupiah(total) + "\n\n";
+  pesan += "*DATA PEMBELI*\n";
+  pesan += "Nama   : " + nama + "\n";
+  pesan += "No. HP : " + hp + "\n";
+  pesan += "Alamat : " + alamat + "\n";
+  if(catatan) pesan += "Catatan: " + catatan + "\n";
+  pesan += "\n*PEMBAYARAN*\n";
+  pesan += "Metode : " + metode + "\n";
+  if(metode === "BNI") pesan += "Rek BNI: 1888719845 (a.n. Lazo Store)\n";
+  if(metode === "QRIS") pesan += "QRIS   : sudah saya scan, bukti menyusul\n";
+  pesan += "\n*TOTAL: " + rupiah(total) + "*\n\n";
+  pesan += "Mohon dikonfirmasi ya, terima kasih 🙏";
+
+  const link = "https://wa.me/" + NO_ADMIN + "?text=" + encodeURIComponent(pesan);
+  window.open(link, "_blank");
+}
+
+/* =========================================================
+   INISIALISASI
+========================================================= */
+renderTotal();
+pilihBayar('COD');
 </script>
 </body>
 </html>
